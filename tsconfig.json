@@ -38,6 +38,9 @@
             "@api/*": [
                 "pages/api/*"
             ],
+            "@features/*": [
+                "features/*"
+            ],
         }
     },
     "include": [
