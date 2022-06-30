@@ -1,0 +1,14 @@
+{
+    "jest.debugMode": true,
+    "activationEvents": [
+      "workspaceContains:node_modules/.bin/jest",
+      "workspaceContains:node_modules/react-scripts/node_modules/.bin/jest",
+      "workspaceContains:node_modules/react-native-scripts",
+      "onCommand:io.orta.jest.start"
+    ],
+  "editor.detectIndentation": false,
+  "editor.tabSize": 4,
+  "editor.formatOnPaste": true,
+  "eslint.packageManager": "yarn",
+  "editor.formatOnSave": true,
+  }
