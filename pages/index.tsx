@@ -1,13 +1,15 @@
 import { InferProps } from "prop-types";
 import { GetStaticProps } from 'next';
-import { getTopMovies, getMoviesList, getFilteredMovies } from "./api/movies";
+import { getTopMovies, getMoviesList, getGenres } from "./api/movies";
 import { DataMoviePropsTypes, GenresPropsTypes } from "types/Movie";
 import Layout from "layout";
 import MoviesTopList from "@components/Movies/MoviesTopList";
 import MoviesList from "@components/Movies/MoviesList";
 import MovieFilter from "@components/Movies/MovieFilter";
 
-export default function Movie({ topMovies, filtersGenres, moviesList }: InferProps<typeof Movie.propTypes>) {
+
+export default function Movie({ topMovies, filtersGenres, initialMoviesList }: InferProps<typeof Movie.propTypes>) {
+
 
 
     return (
@@ -15,22 +17,22 @@ export default function Movie({ topMovies, filtersGenres, moviesList }: InferPro
             <MoviesTopList data={topMovies} />
 
             <MovieFilter genres={filtersGenres} />
-            <MoviesList lists={moviesList} />
+            <MoviesList initialLists={initialMoviesList} />
         </Layout>
     )
 }
 
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async () => {
     const dataTopMovie = await getTopMovies();
-    const dataFilter = await getFilteredMovies();
+    const dataFilter = await getGenres();
     const dataList = await getMoviesList();
 
     return {
         props: {
             topMovies: dataTopMovie.results.slice(0, 10),
             filtersGenres: dataFilter.genres,
-            moviesList: dataList.results
+            initialMoviesList: dataList.results
         }
     }
 }
