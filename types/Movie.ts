@@ -1,33 +1,30 @@
 import { RequestStatus } from "./Request";
-import { shape, arrayOf, objectOf, string, array, number, bool } from "prop-types";
+import { shape, arrayOf, string, array, number, bool } from "prop-types";
 
 export type Movie = {
     id: number,
     backdrop_path: string,
-    genre_ids: Array<number>,
-    original_language: string,
     original_title: string,
     overview: string,
     popularity: number,
     poster_path: string,
     release_date: string,
     title: string,
-    video: boolean,
-    vote_average: number,
-    vote_count: number,
 }
 
-export type MovieState = {
-    filterId: number,
+export type MoviesListingState = {
+    filterGenre: string,
+    filterYear: number,
+    dataLoaded: boolean,
     results: Array<Movie>,
     status: RequestStatus,
-    dataLoaded: boolean,
 }
 
+
 export type FilterParams = {
-    search?: string,
-    genre?: string,
-    name?: string
+    genre: string,
+    year: number,
+    page?: number,
 }
 
 export const DataMoviePropsTypes = arrayOf(

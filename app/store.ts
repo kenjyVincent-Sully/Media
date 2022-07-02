@@ -1,12 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import movieReducer from '@features/movie/MovieSlice';
-
+import moviesListingReducer from '@features/moviesListing/MoviesListingSlice';
 
 export const makeStore = () => {
     return configureStore({
         reducer: {
-            movie: movieReducer,
+            moviesListing: moviesListingReducer,
         }
     });
 };
