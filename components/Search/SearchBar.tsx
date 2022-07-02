@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getSearchResults } from "@api/search";
+import { Label, Search, Suggestions } from './style';
 
 const SearchBar = () => {
 
@@ -46,7 +47,7 @@ const SearchBar = () => {
 
     const SuggestionsListComponent = () => {
         return results.length > 0 ? (
-            <div>
+            <Suggestions>
                 <ul className="suggestions">
                     {results.map((result, i) => {
 
@@ -63,7 +64,7 @@ const SearchBar = () => {
                         )
                     })}
                 </ul>
-            </div>
+            </Suggestions>
 
         ) : (
             <>
@@ -72,7 +73,7 @@ const SearchBar = () => {
                         <span role="img" aria-label="tear emoji">
                             😪
                         </span>{" "}
-                        <em>sorry no suggestions</em>
+                        <em>Désole pas de suggestion</em>
                     </div>
                 }
             </>
@@ -91,13 +92,14 @@ const SearchBar = () => {
     return (
         <div>
             <form action='/search-page' method='GET'>
-                <input name='q'
-                    placeholder='Search'
-                    onChange={handleSearch}
-                    onKeyDown={onKeyDown}
-                    value={input}
-                />
-
+                <Label>
+                    <Search name='q'
+                        placeholder='Search'
+                        onChange={handleSearch}
+                        onKeyDown={onKeyDown}
+                        value={input}
+                    />
+                </Label>
                 {<SuggestionsListComponent />}
             </form>
         </div>
