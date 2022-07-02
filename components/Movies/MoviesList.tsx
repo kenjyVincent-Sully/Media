@@ -25,7 +25,7 @@ const MoviesList = ({ initialLists }) => {
 
     return (
         <>
-            <h2>Tous les films</h2>
+            <h1>Tous les films</h1>
             <InfiniteScroll />
         </>
 

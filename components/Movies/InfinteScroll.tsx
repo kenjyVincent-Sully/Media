@@ -5,6 +5,7 @@ import { useInView } from 'react-intersection-observer';
 import MovieItem from './MovieItem';
 import { getListingMoviesInfiniteScroll } from '@api/movies';
 import { selectFilterGenre, selectFilterYear, selectSortBy } from '@features/moviesListing/MoviesListingSlice';
+import { Container, Item } from './style';
 
 
 const InfiniteScroll: FC = () => {
@@ -54,15 +55,15 @@ const InfiniteScroll: FC = () => {
         <>
             {data.pages.map((page, i) => {
                 return (
-                    <div key={i} >
+                    <Container key={i}>
                         {page.results.map(movie => {
                             return (
-                                <div key={`${movie.id}`}>
+                                <Item key={`${movie.id}`}>
                                     <MovieItem movie={movie} />
-                                </div>
+                                </Item>
                             )
                         })}
-                    </div>
+                    </Container>
                 )
             })}
             <div>

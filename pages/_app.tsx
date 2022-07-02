@@ -5,10 +5,9 @@ import {
     QueryClient,
     QueryClientProvider,
 } from 'react-query';
-import '../styles/globals.css';
 import "swiper/css";
-import "swiper/css/free-mode";
-import "swiper/css/pagination";
+import "swiper/css/navigation";
+import '../styles/globals.css';
 
 import type { AppProps } from 'next/app';
 const queryClient = new QueryClient();

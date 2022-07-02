@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Devices from "@helper/Devices";
+import { placeholder } from "@styles/colors";
 
 const Search = styled.input`   
     border: none;
@@ -8,11 +9,11 @@ const Search = styled.input`
     padding: 7px;
     margin-top: 10px;
     width: 100%;
-    color:  #fff ;
+    color:  ${placeholder} ;
     outline: none ;
     
     &::placeholder{
-        color: #fff;
+        color: ${placeholder};
     }
 
     @media ${Devices.tablet} {

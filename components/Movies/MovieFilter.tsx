@@ -2,7 +2,7 @@ import { InferProps } from "prop-types";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { selectFilterGenre, filterGenreId, getMovies, selectFilterYear, filterYear, setSortBy, selectSortBy } from "@features/moviesListing/MoviesListingSlice";
 import { FC } from "react";
-import { Select } from "./style";
+import { FilterSelect, Select, LabelSelect, ContainerFilter } from "./style";
 
 const MovieFilter: FC<any> = ({ genres }) => {
     const dispatch = useAppDispatch();
@@ -61,55 +61,64 @@ const MovieFilter: FC<any> = ({ genres }) => {
 
 
     return (
-        <div>
-            <span>Trier par:</span>
-            <Select
-                onChange={handleFilterGenre}
-                value={filteredGenre}
-            >
-                <option value="-1">Genres</option>
-                {
-                    genres.map(genre => {
+        <ContainerFilter>
+            <div>
+                <LabelSelect htmlFor="sortBy">Trier par:
 
-                        const { id, name } = genre;
+                    <Select
+                        id="sortBy"
+                        onChange={handleSortBy}
+                        value={sortBy}
+                    >
+                        <option value="-1">Trier par</option>
+                        <option value="title.asc">Titres(de A à Z)</option>
+                        <option value="title.desc">Titres(de Z à A)</option>
+                        <option value="popularity.desc">Popularité +/-</option>
+                        <option value="popularity.asc">Popularité -/+</option>
+                        <option value="vote_average.desc">Notes +/-</option>
+                        <option value="vote_average.asc">Notes -/+</option>
+                        <option value="primary_release_date.desc">Dates de sortie +/-</option>
+                        <option value="primary_release_date.asc">Dates de sortie -/+</option>
+                    </Select>
+                </LabelSelect>
+            </div>
+            <div>
+                <LabelSelect>Trier par:
+                    <FilterSelect
+                        onChange={handleFilterGenre}
+                        value={filteredGenre}
+                    >
+                        <option value="-1">Genres</option>
+                        {
+                            genres.map(genre => {
 
-                        return (
-                            <option key={`${id}-${name}`} value={id}>{name}</option>
-                        )
-                    })
-                }
-            </Select>
+                                const { id, name } = genre;
 
-            <Select
-                onChange={handleFilterYear}
-                value={filteredYear}
-            >
-                <option value="-1">Année</option>
-                {
-                    years().map((year, i) => {
+                                return (
+                                    <option key={`${id}-${name}`} value={id}>{name}</option>
+                                )
+                            })
+                        }
 
-                        return (
-                            <option key={`${i}-id`} value={year}>{year}</option>
-                        )
-                    })
-                }
-            </Select>
+                    </FilterSelect>
 
-            <Select
-                onChange={handleSortBy}
-                value={sortBy}
-            >
-                <option value="-1">Trier par</option>
-                <option value="title.asc">Titres(de A à Z)</option>
-                <option value="title.desc">Titres(de Z à A)</option>
-                <option value="popularity.desc">Popularité +/-</option>
-                <option value="popularity.asc">Popularité -/+</option>
-                <option value="vote_average.desc">Notes +/-</option>
-                <option value="vote_average.asc">Notes -/+</option>
-                <option value="primary_release_date.desc">Dates de sortie +/-</option>
-                <option value="primary_release_date.asc">Dates de sortie -/+</option>
-            </Select>
-        </div>
+                    <FilterSelect
+                        onChange={handleFilterYear}
+                        value={filteredYear}
+                    >
+                        <option value="-1">Année</option>
+                        {
+                            years().map((year, i) => {
+
+                                return (
+                                    <option key={`${i}-id`} value={year}>{year}</option>
+                                )
+                            })
+                        }
+                    </FilterSelect>
+                </LabelSelect>
+            </div>
+        </ContainerFilter>
     )
 }
 

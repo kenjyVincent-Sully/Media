@@ -2,7 +2,7 @@ import { InferProps } from "prop-types";
 import { FC } from "react";
 import { DataMoviePropsTypes } from "types/Movie";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { FreeMode, Pagination } from "swiper";
+import { FreeMode, Pagination, Navigation } from "swiper";
 import MovieItem from "./MovieItem";
 
 const MoviesTopList: FC = ({ data }: InferProps<typeof MoviesTopList.propTypes>) => {
@@ -13,7 +13,7 @@ const MoviesTopList: FC = ({ data }: InferProps<typeof MoviesTopList.propTypes>)
             <Swiper
                 slidesPerView={1}
                 spaceBetween={10}
-                freeMode={true}
+                navigation={true}
                 pagination={{
                     clickable: true,
                 }}
@@ -23,19 +23,19 @@ const MoviesTopList: FC = ({ data }: InferProps<typeof MoviesTopList.propTypes>)
                         spaceBetween: 10,
                     },
                     "@0.75": {
-                        slidesPerView: 2,
+                        slidesPerView: 3,
                         spaceBetween: 20,
                     },
                     "@1.00": {
-                        slidesPerView: 3,
-                        spaceBetween: 40,
+                        slidesPerView: 4,
+                        spaceBetween: 20,
                     },
                     "@1.50": {
-                        slidesPerView: 4,
-                        spaceBetween: 50,
+                        slidesPerView: 5,
+                        spaceBetween: 20,
                     },
                 }}
-                modules={[FreeMode, Pagination]}
+                modules={[Pagination, Navigation]}
                 className="mySwiper"
             >
                 {data.map((movies: object, i: number) => {
