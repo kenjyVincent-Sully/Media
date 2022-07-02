@@ -25,7 +25,7 @@ export default function Movie({ topMovies, filtersGenres, initialMoviesList }: I
 export const getStaticProps: GetStaticProps = async () => {
     const dataTopMovie = await getTopMovies();
     const dataFilter = await getGenres();
-    const dataList = await getListingMoviesInfiniteScroll(1, "-1", 2022);
+    const dataList = await getListingMoviesInfiniteScroll(1, "-1", 2022, "popularity.desc");
 
     return {
         props: {

@@ -23,12 +23,13 @@ export function getDetails(id?: number) {
         .catch((error) => console.error(error));
 }
 
-export function getListingMoviesInfiniteScroll(page: number, genre: string, year: number,) {
+export function getListingMoviesInfiniteScroll(page: number, genre: string, year: number, sort: string) {
 
     const genreParam = genre !== '-1' ? `with_genres=${genre}` : "";
     const yearParam = year !== -1 ? `primary_release_year=${year}` : "";
+    const sortByParam = sort !== "-1" ? `sort_by=${sort}` : "";
 
-    const url = `https://api.themoviedb.org/3/discover/movie?${genreParam}&api_key=${process.env.NEXT_PUBLIC_TMDB_MOVIE_KEY}&language=fr&${yearParam}&page=${page}`;
+    const url = `https://api.themoviedb.org/3/discover/movie?${genreParam}&api_key=${process.env.NEXT_PUBLIC_TMDB_MOVIE_KEY}&language=fr&${yearParam}&page=${page}&${sortByParam}`;
     return fetch(url)
         .then((response) => response.json())
         .catch((error) => console.error(error));

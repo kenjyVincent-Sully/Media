@@ -4,12 +4,13 @@ import { FC, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import MovieItem from './MovieItem';
 import { getListingMoviesInfiniteScroll } from '@api/movies';
-import { selectFilterGenre, selectFilterYear } from '@features/moviesListing/MoviesListingSlice';
+import { selectFilterGenre, selectFilterYear, selectSortBy } from '@features/moviesListing/MoviesListingSlice';
 
 
 const InfiniteScroll: FC = () => {
     const filteredGenre = useAppSelector(selectFilterGenre);
     const filteredYear = useAppSelector(selectFilterYear);
+    const sortBy = useAppSelector(selectSortBy)
     const { ref, inView } = useInView();
 
     const {
@@ -21,7 +22,7 @@ const InfiniteScroll: FC = () => {
         isFetchingNextPage,
         status,
         refetch,
-    } = useInfiniteQuery('results', ({ pageParam = 1 }) => getListingMoviesInfiniteScroll(pageParam, filteredGenre, filteredYear),
+    } = useInfiniteQuery('results', ({ pageParam = 1 }) => getListingMoviesInfiniteScroll(pageParam, filteredGenre, filteredYear, sortBy),
         {
 
             getNextPageParam: (data, pages) => {
@@ -36,7 +37,7 @@ const InfiniteScroll: FC = () => {
     useEffect(() => {
 
         refetch({ refetchPage: (page, index) => index === 0 })
-    }, [filteredGenre, filteredYear]);
+    }, [filteredGenre, filteredYear, sortBy]);
 
     useEffect(() => {
         if (inView) {

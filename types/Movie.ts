@@ -15,6 +15,7 @@ export type Movie = {
 export type MoviesListingState = {
     filterGenre: string,
     filterYear: number,
+    sortBy: string,
     dataLoaded: boolean,
     results: Array<Movie>,
     status: RequestStatus,
@@ -25,22 +26,18 @@ export type FilterParams = {
     genre: string,
     year: number,
     page?: number,
+    sortBy: string,
 }
 
 export const DataMoviePropsTypes = arrayOf(
     shape({
         id: number.isRequired,
-        backdrop_path: string.isRequired,
-        genre_ids: array.isRequired,
-        original_language: string.isRequired,
         original_title: string.isRequired,
         overview: string.isRequired,
         popularity: number.isRequired,
-        poster_path: string.isRequired,
+        poster_path: string,
         release_date: string.isRequired,
         title: string.isRequired,
-        video: bool.isRequired,
-        vote_average: number.isRequired,
     }).isRequired,
 ).isRequired
 

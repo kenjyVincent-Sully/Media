@@ -1,12 +1,13 @@
 import { InferProps } from "prop-types";
 import { useAppDispatch, useAppSelector } from "app/hooks";
-import { selectFilterGenre, filterGenreId, getMovies, selectFilterYear, filterYear } from "@features/moviesListing/MoviesListingSlice";
+import { selectFilterGenre, filterGenreId, getMovies, selectFilterYear, filterYear, setSortBy, selectSortBy } from "@features/moviesListing/MoviesListingSlice";
 import { FC } from "react";
 
 const MovieFilter: FC<any> = ({ genres }) => {
     const dispatch = useAppDispatch();
     const filteredGenre = useAppSelector(selectFilterGenre);
     const filteredYear = useAppSelector(selectFilterYear);
+    const sortBy = useAppSelector(selectSortBy);
 
     const handleFilterGenre = (e: React.FormEvent<HTMLSelectElement>) => {
 
@@ -16,7 +17,8 @@ const MovieFilter: FC<any> = ({ genres }) => {
 
         dispatch(getMovies({
             genre: selectedGenre,
-            year: filteredYear
+            year: filteredYear,
+            sortBy: sortBy,
         }));
     }
 
@@ -28,9 +30,22 @@ const MovieFilter: FC<any> = ({ genres }) => {
         dispatch(getMovies({
             year: selectYear,
             genre: filteredGenre,
+            sortBy: sortBy,
         }));
     }
 
+    const handleSortBy = (e: React.FormEvent<HTMLSelectElement>) => {
+        const sortByValue = e.currentTarget.value;
+
+        dispatch(setSortBy(sortByValue));
+
+        dispatch(getMovies({
+            sortBy: sortByValue,
+            year: filteredYear,
+            genre: filteredGenre,
+
+        }));
+    }
 
     const years = () => {
         let startYear = 1900;
@@ -77,6 +92,21 @@ const MovieFilter: FC<any> = ({ genres }) => {
                         )
                     })
                 }
+            </select>
+
+            <select
+                onChange={handleSortBy}
+                value={sortBy}
+            >
+                <option value="-1">Trier par</option>
+                <option value="title.asc">Titres(de A à Z)</option>
+                <option value="title.desc">Titres(de Z à A)</option>
+                <option value="popularity.desc">Popularité +/-</option>
+                <option value="popularity.asc">Popularité -/+</option>
+                <option value="vote_average.desc">Notes +/-</option>
+                <option value="vote_average.asc">Notes -/+</option>
+                <option value="primary_release_date.desc">Dates de sortie +/-</option>
+                <option value="primary_release_date.asc">Dates de sortie -/+</option>
             </select>
         </div>
     )

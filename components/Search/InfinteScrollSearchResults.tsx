@@ -48,7 +48,6 @@ const InfinteScrollSearchResults: FC<{ keywords: string | string[] }> = ({ keywo
                     < div key={i} >
                         {
                             page.results.map(movie => {
-                                console.log("movie", movie);
 
                                 return (
                                     <div key={`${movie.id}`}>
