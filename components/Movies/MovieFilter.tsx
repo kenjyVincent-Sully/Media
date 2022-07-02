@@ -2,6 +2,7 @@ import { InferProps } from "prop-types";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { selectFilterGenre, filterGenreId, getMovies, selectFilterYear, filterYear, setSortBy, selectSortBy } from "@features/moviesListing/MoviesListingSlice";
 import { FC } from "react";
+import { Select } from "./style";
 
 const MovieFilter: FC<any> = ({ genres }) => {
     const dispatch = useAppDispatch();
@@ -62,7 +63,7 @@ const MovieFilter: FC<any> = ({ genres }) => {
     return (
         <div>
             <span>Trier par:</span>
-            <select
+            <Select
                 onChange={handleFilterGenre}
                 value={filteredGenre}
             >
@@ -77,9 +78,9 @@ const MovieFilter: FC<any> = ({ genres }) => {
                         )
                     })
                 }
-            </select>
+            </Select>
 
-            <select
+            <Select
                 onChange={handleFilterYear}
                 value={filteredYear}
             >
@@ -92,9 +93,9 @@ const MovieFilter: FC<any> = ({ genres }) => {
                         )
                     })
                 }
-            </select>
+            </Select>
 
-            <select
+            <Select
                 onChange={handleSortBy}
                 value={sortBy}
             >
@@ -107,7 +108,7 @@ const MovieFilter: FC<any> = ({ genres }) => {
                 <option value="vote_average.asc">Notes -/+</option>
                 <option value="primary_release_date.desc">Dates de sortie +/-</option>
                 <option value="primary_release_date.asc">Dates de sortie -/+</option>
-            </select>
+            </Select>
         </div>
     )
 }
