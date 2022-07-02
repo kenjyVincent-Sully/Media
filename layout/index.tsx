@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import PropTypes, { InferProps } from "prop-types";
+import Header from '@components/Header/Header';
 
 export default function Layout({ children }: InferProps<typeof Layout.propTypes>) {
     return (
@@ -9,7 +10,9 @@ export default function Layout({ children }: InferProps<typeof Layout.propTypes>
                 <meta name="description" content="Test technique React" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>
+            <Header />
             {children}
+
         </>
     );
 }

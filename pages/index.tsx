@@ -7,17 +7,19 @@ import MoviesTopList from "@components/Movies/MoviesTopList";
 import MoviesList from "@components/Movies/MoviesList";
 import MovieFilter from "@components/Movies/MovieFilter";
 import SearchBar from "@components/Search/SearchBar";
-
+import styles from "@styles/Home.module.css";
 
 export default function Movie({ topMovies, filtersGenres, initialMoviesList }: InferProps<typeof Movie.propTypes>) {
 
     return (
-        <Layout>
-            <SearchBar />
-            <MoviesTopList data={topMovies} />
-            <MovieFilter genres={filtersGenres} />
-            <MoviesList initialLists={initialMoviesList} />
-        </Layout>
+        <div className={styles.container}>
+            <Layout>
+                <SearchBar />
+                <MoviesTopList data={topMovies} />
+                <MovieFilter genres={filtersGenres} />
+                <MoviesList initialLists={initialMoviesList} />
+            </Layout>
+        </div>
     )
 }
 

@@ -41,6 +41,9 @@
             "@features/*": [
                 "features/*"
             ],
+            "@styles/*": [
+                "styles/*"
+            ],
         }
     },
     "include": [
