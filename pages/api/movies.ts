@@ -1,6 +1,3 @@
-import { FilterParams } from 'types/Movie';
-
-
 export function getTopMovies() {
     const url = `${process.env.NEXT_PUBLIC_PATH_API_URI}/movie/top_rated?api_key=${process.env.NEXT_PUBLIC_TMDB_MOVIE_KEY}&language=fr&page=1`;
     return fetch(url)

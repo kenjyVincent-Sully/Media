@@ -1,13 +1,13 @@
 import { InferProps } from "prop-types";
 import { FC } from "react";
-import { useAppDispatch, useAppSelector } from "app/hooks";
+import { useAppDispatch, useAppSelector } from "@app/hooks";
 import {
     selectFilterGenre, filterGenreId,
     getMovies, selectFilterYear, filterYear, setSortBy, selectSortBy
 } from "@features/moviesListing/MoviesListingSlice";
 import { WrapFilter, LabelSelect, ContainerFilter } from "../MoviesTopList/style";
 import Dropdown, { Option } from 'react-dropdown';
-
+import { Genre } from "types/Movie";
 
 const getFilteryears = () => {
     let startYear = 1900;
@@ -21,7 +21,7 @@ const getFilteryears = () => {
 }
 
 
-const MovieFilter: FC = ({ genres }) => {
+const MovieFilter: FC<{ genres: Array<Genre> }> = ({ genres }) => {
     const dispatch = useAppDispatch();
     const filteredGenre = useAppSelector(selectFilterGenre);
     const filteredYear = useAppSelector(selectFilterYear);
@@ -43,7 +43,7 @@ const MovieFilter: FC = ({ genres }) => {
 
     const formattedData = () => {
         genres.forEach(genre => {
-            optionsGenres.push({ value: genre.id, label: genre.name });
+            optionsGenres.push({ value: genre.id.toString(), label: genre.name });
         });
     }
     formattedData();
@@ -51,6 +51,7 @@ const MovieFilter: FC = ({ genres }) => {
     const handleFilterGenre = (arg: Option) => {
 
         const selectedGenre = arg.value;
+        console.log(selectedGenre);
 
         dispatch(filterGenreId(selectedGenre));
 

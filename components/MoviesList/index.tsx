@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "app/hooks";
+import { useAppDispatch, useAppSelector } from "@app/hooks";
 import { selectDataLoaded, selectResults, setInitialMoviesList } from "@features/moviesListing/MoviesListingSlice";
 import MovieFilter from "../MoviesFilters";
 import InfiniteScroll from "../InfinteScroll";
