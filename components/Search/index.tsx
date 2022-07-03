@@ -100,7 +100,7 @@ const SearchBar = () => {
                     value={input}
 
                 />
-                <ButtonSearch type="submit" />
+                <ButtonSearch type="submit" aria-label="Recherche">Recherche</ButtonSearch>
 
             </Form>
             {<SuggestionsListComponent />}

@@ -1,4 +1,4 @@
-import { Year, Img, Item, TitleMovie } from "./style";
+import { Year, Img, Item, TitleMovie } from "../MoviesTopList/style";
 
 const MovieItem = ({ movie }) => {
     const { original_title, poster_path, release_date, title, id, backdrop_path } = movie;

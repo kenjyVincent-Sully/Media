@@ -3,8 +3,8 @@ import { GetStaticProps } from 'next';
 import { getTopMovies, getListingMoviesInfiniteScroll, getGenres } from "./api/movies";
 import { DataMoviePropsTypes, GenresPropsTypes } from "types/Movie";
 import Layout from "layout";
-import MoviesTopList from "@components/Movies/MoviesTopList";
-import MoviesList from "@components/Movies/MoviesList";
+import MoviesTopList from "@components/MoviesTopList";
+import MoviesList from "@components/MoviesList";
 import styles from "@styles/Home.module.css";
 
 export default function Movie({ topMovies, filtersGenres, initialMoviesList }: InferProps<typeof Movie.propTypes>) {

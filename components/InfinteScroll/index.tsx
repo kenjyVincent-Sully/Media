@@ -4,8 +4,8 @@ import { FC, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { getListingMoviesInfiniteScroll } from '@api/movies';
 import { selectFilterGenre, selectFilterYear, selectSortBy } from '@features/moviesListing/MoviesListingSlice';
-import MovieItem from './MovieItem';
-import { Container, Item } from './style';
+import MovieItem from '../MovieItem';
+import { Container, Item } from '../MoviesTopList/style';
 
 
 const InfiniteScroll: FC = () => {

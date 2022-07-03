@@ -3,7 +3,7 @@ import { FC } from "react";
 import { DataMoviePropsTypes } from "types/Movie";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
-import MovieItem from "./MovieItem";
+import MovieItem from "../MovieItem";
 
 const MoviesTopList: FC = ({ data }: InferProps<typeof MoviesTopList.propTypes>) => {
 

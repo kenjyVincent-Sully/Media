@@ -31,7 +31,6 @@ const Container = styled.div`
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 29px;
-    align-items: center;
 `;
 
 const ContainerFilter = styled(Container)`
@@ -49,6 +48,7 @@ const WrapFilter = styled.div`
 
 const Item = styled.div`
     width: 145px;
+    /* margin: 0 auto; */
 `;
 
 

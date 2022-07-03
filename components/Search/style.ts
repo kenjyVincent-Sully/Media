@@ -45,6 +45,7 @@ const ButtonSearch = styled.button`
     cursor: pointer;
     opacity: 0.7;
     height: 30px;
+    font-size: 0;
 `;
 
 const Container = styled.div`    

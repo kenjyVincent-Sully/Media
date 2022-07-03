@@ -14,8 +14,6 @@ const SearchPage: FC = () => {
 
     const searchRequest = () => {
         getSearchResults(q).then(results => {
-            console.log(results);
-
             setTotalResults(results.total_results);
 
         }).catch(err => console.log(err));

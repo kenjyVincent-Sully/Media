@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import PropTypes, { InferProps } from "prop-types";
-import Header from '@components/Header/Header';
+import Header from '@components/Header';
 
 export default function Layout({ children }: InferProps<typeof Layout.propTypes>) {
     return (

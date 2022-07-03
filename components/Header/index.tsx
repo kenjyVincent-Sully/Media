@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Logo from "./img/logo.svg";
-import SearchBar from "@components/Search/SearchBar";
+import SearchBar from "@components/Search";
 import { Container } from "./style";
 
 const Header = () => {

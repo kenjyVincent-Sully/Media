@@ -2,7 +2,7 @@ import { useInfiniteQuery } from 'react-query';
 import { getSearchResultsInfiniteScroll } from '@api/search';
 import { FC, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-import MovieItem from '../Movies/MovieItem';
+import MovieItem from '../MovieItem';
 import { Container, Item } from './style';
 
 const InfinteScrollSearchResults: FC<{ keywords: string | string[] }> = ({ keywords }) => {

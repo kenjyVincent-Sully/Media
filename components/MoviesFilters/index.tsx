@@ -5,7 +5,7 @@ import {
     selectFilterGenre, filterGenreId,
     getMovies, selectFilterYear, filterYear, setSortBy, selectSortBy
 } from "@features/moviesListing/MoviesListingSlice";
-import { WrapFilter, LabelSelect, ContainerFilter } from "./style";
+import { WrapFilter, LabelSelect, ContainerFilter } from "../MoviesTopList/style";
 import Dropdown, { Option } from 'react-dropdown';
 
 
@@ -40,10 +40,6 @@ const MovieFilter: FC = ({ genres }) => {
     ];
 
     const defaultOption = optionsSortBy["-1"];
-    console.log(typeof genres);
-
-
-    console.log("optionsGenres", optionsGenres);
 
     const formattedData = () => {
         genres.forEach(genre => {
@@ -92,13 +88,16 @@ const MovieFilter: FC = ({ genres }) => {
 
     return (
         <ContainerFilter>
-            <LabelSelect htmlFor="sortBy">Trier par:</LabelSelect>
-            <Dropdown
-                options={optionsSortBy}
-                onChange={handleSortBy}
-                value={defaultOption}
-                placeholder="Trier par"
-            />
+            <WrapFilter>
+                <LabelSelect htmlFor="sortBy">Trier par:</LabelSelect>
+                <Dropdown
+                    options={optionsSortBy}
+                    onChange={handleSortBy}
+                    value={defaultOption}
+                    placeholder="Trier par"
+                />
+            </WrapFilter>
+
             <WrapFilter>
 
 
