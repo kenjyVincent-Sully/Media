@@ -44,6 +44,9 @@
             "@styles/*": [
                 "styles/*"
             ],
+            "@/mocks/*": [
+                "mocks/*"
+            ],
         }
     },
     "include": [
