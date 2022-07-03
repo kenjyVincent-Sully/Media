@@ -1,0 +1,16 @@
+export const movie = {
+    "adult": false,
+    "backdrop_path": "/kXfqcdQKsToO0OUXHcrrNCHDBzO.jpg",
+    "genre_ids": [18, 80],
+    "id": 278,
+    "original_language": "en",
+    "original_title": "The Shawshank Redemption",
+    "overview": "En 1947, Andy Dufresne, un jeune banquier, est condamné à la prison à vie pour le meurtre de sa femme et de son amant. Ayant beau clamer son innocence, il est emprisonné à Shawshank, le pénitencier le plus sévère de l'État du Maine. Il y fait la rencontre de Red, un noir désabusé, détenu depuis vingt ans. Commence alors une grande histoire d'amitié entre les deux hommes…",
+    "popularity": 77.181,
+    "poster_path": "/rL1YQLqUtHK3HdQyenHvuOCuWzO.jpg",
+    "release_date": "1994-09-23",
+    "title": "Les Évadés",
+    "video": false,
+    "vote_average": 8.7,
+    "vote_count": 21684,
+}

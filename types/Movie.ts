@@ -29,6 +29,13 @@ export type FilterParams = {
     sortBy: string,
 }
 
+export type Genre = {
+
+    id: number,
+    name: string,
+
+}
+
 export const DataMoviePropsTypes = arrayOf(
     shape({
         id: number.isRequired,
