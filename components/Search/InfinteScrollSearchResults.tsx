@@ -3,6 +3,7 @@ import { getSearchResultsInfiniteScroll } from '@api/search';
 import { FC, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import MovieItem from '../Movies/MovieItem';
+import { Container, Item } from './style';
 
 const InfinteScrollSearchResults: FC<{ keywords: string | string[] }> = ({ keywords }) => {
     const { ref, inView } = useInView();
@@ -28,7 +29,7 @@ const InfinteScrollSearchResults: FC<{ keywords: string | string[] }> = ({ keywo
         })
 
     useEffect(() => {
-        if (inView) {
+        if (inView && hasNextPage) {
             fetchNextPage()
         }
     }, [inView])
@@ -45,18 +46,18 @@ const InfinteScrollSearchResults: FC<{ keywords: string | string[] }> = ({ keywo
             {data.pages.map((page, i) => {
 
                 return (
-                    < div key={i} >
+                    < Container key={i} >
                         {
                             page.results.map(movie => {
 
                                 return (
-                                    <div key={`${movie.id}`}>
+                                    <Item key={`${movie.id}`}>
                                         <MovieItem movie={movie} />
-                                    </div>
+                                    </Item>
                                 )
                             })
                         }
-                    </div>
+                    </Container>
                 )
 
 

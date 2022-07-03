@@ -30,6 +30,7 @@ const Container = styled.div`
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-between;
+    margin-bottom: 29px;
     
 `;
 const ContainerFilter = styled(Container)`
@@ -37,10 +38,22 @@ const ContainerFilter = styled(Container)`
 `;
 
 const Item = styled.div`
-    width: 140px;
-`;
-const Year = styled.p`
-    color: ${secondaryTextColor};
+    width: 145px;
 `;
 
-export { Select, Img, Container, Item, Year, FilterSelect, LabelSelect, ContainerFilter };
+
+
+const TitleMovie = styled.p`
+    font-size: 0.75rem;
+`;
+
+const Year = styled.p`
+    color: ${secondaryTextColor};
+    font-size: 0.75rem;
+`;
+
+export {
+    Select, Img, Container, Item, Year,
+    FilterSelect, LabelSelect, ContainerFilter, TitleMovie,
+
+};

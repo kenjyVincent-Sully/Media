@@ -1,11 +1,11 @@
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "app/hooks";
 import { selectDataLoaded, selectResults, setInitialMoviesList } from "@features/moviesListing/MoviesListingSlice";
-import { useEffect, useState } from "react";
-import MovieItem from "./MovieItem";
+import MovieFilter from "./MovieFilter";
 import InfiniteScroll from "./InfinteScroll";
 
 
-const MoviesList = ({ initialLists }) => {
+const MoviesList = ({ initialLists, genres }) => {
     const [movies, setMovies] = useState(initialLists);
     const dataLoaded = useAppSelector(selectDataLoaded);
     const results = useAppSelector(selectResults);
@@ -26,6 +26,7 @@ const MoviesList = ({ initialLists }) => {
     return (
         <>
             <h1>Tous les films</h1>
+            <MovieFilter genres={genres} />
             <InfiniteScroll />
         </>
 

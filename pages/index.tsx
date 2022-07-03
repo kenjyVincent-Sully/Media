@@ -5,7 +5,6 @@ import { DataMoviePropsTypes, GenresPropsTypes } from "types/Movie";
 import Layout from "layout";
 import MoviesTopList from "@components/Movies/MoviesTopList";
 import MoviesList from "@components/Movies/MoviesList";
-import MovieFilter from "@components/Movies/MovieFilter";
 import styles from "@styles/Home.module.css";
 
 export default function Movie({ topMovies, filtersGenres, initialMoviesList }: InferProps<typeof Movie.propTypes>) {
@@ -14,8 +13,11 @@ export default function Movie({ topMovies, filtersGenres, initialMoviesList }: I
         <div className={styles.container}>
             <Layout>
                 <MoviesTopList data={topMovies} />
-                <MovieFilter genres={filtersGenres} />
-                <MoviesList initialLists={initialMoviesList} />
+                <hr className={styles.hr} />
+                <MoviesList
+                    initialLists={initialMoviesList}
+                    genres={filtersGenres}
+                />
             </Layout>
         </div>
     )

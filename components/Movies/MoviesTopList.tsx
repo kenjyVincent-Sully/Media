@@ -2,7 +2,7 @@ import { InferProps } from "prop-types";
 import { FC } from "react";
 import { DataMoviePropsTypes } from "types/Movie";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { FreeMode, Pagination, Navigation } from "swiper";
+import { Pagination, Navigation } from "swiper";
 import MovieItem from "./MovieItem";
 
 const MoviesTopList: FC = ({ data }: InferProps<typeof MoviesTopList.propTypes>) => {
@@ -20,7 +20,7 @@ const MoviesTopList: FC = ({ data }: InferProps<typeof MoviesTopList.propTypes>)
                 breakpoints={{
                     "@0.00": {
                         slidesPerView: 2,
-                        spaceBetween: 10,
+                        spaceBetween: 20,
                     },
                     "@0.75": {
                         slidesPerView: 3,

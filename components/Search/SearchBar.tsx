@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getSearchResults } from "@api/search";
-import { Label, Search, Suggestions } from './style';
+import { Form, Search, Suggestions, ButtonSearch } from './style';
 
 const SearchBar = () => {
 
@@ -91,17 +91,19 @@ const SearchBar = () => {
 
     return (
         <div>
-            <form action='/search-page' method='GET'>
-                <Label>
-                    <Search name='q'
-                        placeholder='Search'
-                        onChange={handleSearch}
-                        onKeyDown={onKeyDown}
-                        value={input}
-                    />
-                </Label>
-                {<SuggestionsListComponent />}
-            </form>
+            <Form action='/search-page' method='GET'>
+                <Search name='q'
+                    type="search"
+                    placeholder='Rechercher un film'
+                    onChange={handleSearch}
+                    onKeyDown={onKeyDown}
+                    value={input}
+
+                />
+                <ButtonSearch type="submit" />
+
+            </Form>
+            {<SuggestionsListComponent />}
         </div>
     )
 }

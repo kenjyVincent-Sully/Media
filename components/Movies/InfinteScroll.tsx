@@ -2,9 +2,9 @@ import { useInfiniteQuery } from 'react-query';
 import { useAppSelector } from 'app/hooks';
 import { FC, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-import MovieItem from './MovieItem';
 import { getListingMoviesInfiniteScroll } from '@api/movies';
 import { selectFilterGenre, selectFilterYear, selectSortBy } from '@features/moviesListing/MoviesListingSlice';
+import MovieItem from './MovieItem';
 import { Container, Item } from './style';
 
 
@@ -41,7 +41,7 @@ const InfiniteScroll: FC = () => {
     }, [filteredGenre, filteredYear, sortBy]);
 
     useEffect(() => {
-        if (inView) {
+        if (inView && hasNextPage) {
             fetchNextPage()
         }
     }, [inView])

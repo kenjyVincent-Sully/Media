@@ -10,6 +10,7 @@ body {
     background-repeat: no-repeat;
     background-blend-mode: lighten;
     color: white;
+    font-size: 16px;
 
 }
 
@@ -40,4 +41,18 @@ a {
 .swiper-rtl .swiper-button-next:after {
     font-size: 20px;
     color: #2a67b6;
+}
+
+h1 {
+    font-size: 1.2rem;
+    margin: 30px 0 30px 0;
+}
+
+@media (max-width: 801px) {
+
+    .swiper-button-next,
+    .swiper-button-prev {
+
+        display: none;
+    }
 }

@@ -1,7 +1,10 @@
 import { InferProps } from "prop-types";
-import { useAppDispatch, useAppSelector } from "app/hooks";
-import { selectFilterGenre, filterGenreId, getMovies, selectFilterYear, filterYear, setSortBy, selectSortBy } from "@features/moviesListing/MoviesListingSlice";
 import { FC } from "react";
+import { useAppDispatch, useAppSelector } from "app/hooks";
+import {
+    selectFilterGenre, filterGenreId,
+    getMovies, selectFilterYear, filterYear, setSortBy, selectSortBy
+} from "@features/moviesListing/MoviesListingSlice";
 import { FilterSelect, Select, LabelSelect, ContainerFilter } from "./style";
 
 const MovieFilter: FC<any> = ({ genres }) => {
