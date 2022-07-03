@@ -5,17 +5,56 @@ import {
     selectFilterGenre, filterGenreId,
     getMovies, selectFilterYear, filterYear, setSortBy, selectSortBy
 } from "@features/moviesListing/MoviesListingSlice";
-import { FilterSelect, Select, LabelSelect, ContainerFilter } from "./style";
+import { WrapFilter, LabelSelect, ContainerFilter } from "./style";
+import Dropdown, { Option } from 'react-dropdown';
 
-const MovieFilter: FC<any> = ({ genres }) => {
+
+const getFilteryears = () => {
+    let startYear = 1900;
+    const currentYear = new Date().getFullYear();
+    let arr = [];
+
+    for (let i = currentYear; i > startYear + 1; i--) {
+        arr.push(i.toString());
+    }
+    return arr;
+}
+
+
+const MovieFilter: FC = ({ genres }) => {
     const dispatch = useAppDispatch();
     const filteredGenre = useAppSelector(selectFilterGenre);
     const filteredYear = useAppSelector(selectFilterYear);
     const sortBy = useAppSelector(selectSortBy);
+    const optionYears = getFilteryears();
+    const optionsGenres: Array<Option> = [];
+    const optionsSortBy = [
+        { value: "title.asc", label: "Titres(de A à Z)" },
+        { value: "title.desc", label: "Titres(de Z à A)" },
+        { value: "popularity.asc", label: "Popularité +/-" },
+        { value: "popularity.des", label: "Popularité -/+" },
+        { value: "vote_average.asc", label: "Notes +/-" },
+        { value: "vote_average.desc", label: "Notes -/+" },
+        { value: "primary_release_date.asc", label: "Dates de sortie +/-" },
+        { value: "primary_release_date.desc", label: "Dates de sortie -/+" },
+    ];
 
-    const handleFilterGenre = (e: React.FormEvent<HTMLSelectElement>) => {
+    const defaultOption = optionsSortBy["-1"];
+    console.log(typeof genres);
 
-        const selectedGenre = e.currentTarget.value;
+
+    console.log("optionsGenres", optionsGenres);
+
+    const formattedData = () => {
+        genres.forEach(genre => {
+            optionsGenres.push({ value: genre.id, label: genre.name });
+        });
+    }
+    formattedData();
+
+    const handleFilterGenre = (arg: Option) => {
+
+        const selectedGenre = arg.value;
 
         dispatch(filterGenreId(selectedGenre));
 
@@ -26,20 +65,20 @@ const MovieFilter: FC<any> = ({ genres }) => {
         }));
     }
 
-    const handleFilterYear = (e: React.FormEvent<HTMLSelectElement>) => {
-        const selectYear = parseInt(e.currentTarget.value);
+    const handleFilterYear = (arg: Option) => {
+        const selectYear = arg.value;
 
-        dispatch(filterYear(selectYear));
+        dispatch(filterYear(parseInt(selectYear, 10)));
 
         dispatch(getMovies({
-            year: selectYear,
+            year: parseInt(selectYear, 10),
             genre: filteredGenre,
             sortBy: sortBy,
         }));
     }
 
-    const handleSortBy = (e: React.FormEvent<HTMLSelectElement>) => {
-        const sortByValue = e.currentTarget.value;
+    const handleSortBy = (arg: Option) => {
+        const sortByValue = arg.value;
 
         dispatch(setSortBy(sortByValue));
 
@@ -51,76 +90,33 @@ const MovieFilter: FC<any> = ({ genres }) => {
         }));
     }
 
-    const years = () => {
-        let startYear = 1900;
-        const currentYear = new Date().getFullYear();
-        let arr = [];
-
-        for (let i = currentYear; i > startYear + 1; i--) {
-            arr.push(i);
-        }
-        return arr;
-    }
-
-
     return (
         <ContainerFilter>
-            <div>
-                <LabelSelect htmlFor="sortBy">Trier par:
+            <LabelSelect htmlFor="sortBy">Trier par:</LabelSelect>
+            <Dropdown
+                options={optionsSortBy}
+                onChange={handleSortBy}
+                value={defaultOption}
+                placeholder="Trier par"
+            />
+            <WrapFilter>
 
-                    <Select
-                        id="sortBy"
-                        onChange={handleSortBy}
-                        value={sortBy}
-                    >
-                        <option value="-1">Trier par</option>
-                        <option value="title.asc">Titres(de A à Z)</option>
-                        <option value="title.desc">Titres(de Z à A)</option>
-                        <option value="popularity.desc">Popularité +/-</option>
-                        <option value="popularity.asc">Popularité -/+</option>
-                        <option value="vote_average.desc">Notes +/-</option>
-                        <option value="vote_average.asc">Notes -/+</option>
-                        <option value="primary_release_date.desc">Dates de sortie +/-</option>
-                        <option value="primary_release_date.asc">Dates de sortie -/+</option>
-                    </Select>
-                </LabelSelect>
-            </div>
-            <div>
-                <LabelSelect>Trier par:
-                    <FilterSelect
-                        onChange={handleFilterGenre}
-                        value={filteredGenre}
-                    >
-                        <option value="-1">Genres</option>
-                        {
-                            genres.map(genre => {
 
-                                const { id, name } = genre;
+                <LabelSelect>Trier par:  </LabelSelect>
+                <Dropdown
+                    options={optionsGenres}
+                    onChange={handleFilterGenre}
+                    value={defaultOption}
+                    placeholder="Genres"
+                />
 
-                                return (
-                                    <option key={`${id}-${name}`} value={id}>{name}</option>
-                                )
-                            })
-                        }
-
-                    </FilterSelect>
-
-                    <FilterSelect
-                        onChange={handleFilterYear}
-                        value={filteredYear}
-                    >
-                        <option value="-1">Année</option>
-                        {
-                            years().map((year, i) => {
-
-                                return (
-                                    <option key={`${i}-id`} value={year}>{year}</option>
-                                )
-                            })
-                        }
-                    </FilterSelect>
-                </LabelSelect>
-            </div>
+                <Dropdown
+                    options={optionYears}
+                    onChange={handleFilterYear}
+                    value={defaultOption}
+                    placeholder="Année"
+                />
+            </WrapFilter>
         </ContainerFilter>
     )
 }

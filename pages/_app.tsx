@@ -7,6 +7,7 @@ import {
 } from 'react-query';
 import "swiper/css";
 import "swiper/css/navigation";
+import 'react-dropdown/style.css';
 import '../styles/globals.css';
 
 import type { AppProps } from 'next/app';

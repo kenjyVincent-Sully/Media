@@ -31,16 +31,25 @@ const Container = styled.div`
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 29px;
-    
+    align-items: center;
 `;
+
 const ContainerFilter = styled(Container)`
     justify-content:flex-start;
+`;
+
+const WrapFilter = styled.div`
+    display: flex;
+    align-items: center;
+
+    .Dropdown-control{
+        min-width: 100px ;
+    }
 `;
 
 const Item = styled.div`
     width: 145px;
 `;
-
 
 
 const TitleMovie = styled.p`
@@ -55,5 +64,5 @@ const Year = styled.p`
 export {
     Select, Img, Container, Item, Year,
     FilterSelect, LabelSelect, ContainerFilter, TitleMovie,
-
+    WrapFilter
 };

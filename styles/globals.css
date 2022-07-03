@@ -48,11 +48,65 @@ h1 {
     margin: 30px 0 30px 0;
 }
 
+.Dropdown-control {
+    background: transparent;
+    border-radius: 10px;
+    padding: 5px;
+    color: #3f5070;
+    outline: none;
+    border: 0.45px solid #3f5070;
+    margin: 5px 10px;
+    font-size: 0.75rem;
+    min-width: 190px;
+}
+
+.Dropdown-menu {
+    background-color: #263755;
+    border: 0.45px solid #3f5070;
+    border-radius: 10px;
+    color: #3f5070;
+    font-size: 0.75rem;
+}
+
+.Dropdown-option.is-selected {
+    background-color: #f2f9fc;
+    color: #3f5070;
+}
+
+.Dropdown-option {
+    color: #3f5070;
+    padding: 8px 16px;
+}
+
+.Dropdown-arrow {
+    background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='UTF-8'%3F%3E%3Csvg width='10px' height='6px' viewBox='0 0 10 6' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'%3E%3C!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch --%3E%3Ctitle%3Edropdownarrow%3C/title%3E%3Cdesc%3ECreated with Sketch.%3C/desc%3E%3Cdefs%3E%3C/defs%3E%3Cg id='Page-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'%3E%3Cg id='Artboard' transform='translate(-280.000000, -167.000000)' fill='%23586E94' fill-rule='nonzero'%3E%3Cpath d='M289.051607,172.824264 C289.268565,173.058579 289.620324,173.058579 289.837282,172.824264 C290.054239,172.589949 290.054239,172.210051 289.837282,171.975736 L285.392837,167.175736 C285.175879,166.941421 284.824121,166.941421 284.607163,167.175736 L280.162718,171.975736 C279.945761,172.210051 279.945761,172.589949 280.162718,172.824264 C280.379676,173.058579 280.731435,173.058579 280.948393,172.824264 L284.999954,168.448578 L289.051607,172.824264 Z' id='dropdownarrow' transform='translate(285.000000, 170.000000) rotate(-180.000000) translate(-285.000000, -170.000000) '%3E%3C/path%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    border-color: transparent;
+    border-width: 6px 5px 0;
+    transform: rotate(180deg);
+    top: 10px;
+
+}
+
+.is-open .Dropdown-arrow {
+    border-color: transparent;
+    transform: rotate(0);
+}
+
 @media (max-width: 801px) {
 
     .swiper-button-next,
     .swiper-button-prev {
 
         display: none;
+    }
+
+
+}
+
+@media (min-width: 801px) {
+
+    .Dropdown-control {
+
+        min-width: 120px;
     }
 }
