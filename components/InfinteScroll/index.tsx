@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC, Fragment, useEffect } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import { useAppSelector } from 'app/hooks';
 import { useInView } from 'react-intersection-observer';
@@ -61,19 +61,22 @@ const InfiniteScroll: FC = () => {
 
     return (
         <>
-            {data.pages.map((page, i) => {
-                return (
-                    <Container key={i}>
-                        {page.results.map((movie: Movie) => {
-                            return (
-                                <Item key={`${movie.id}`}>
-                                    <MovieItem movie={movie} />
-                                </Item>
-                            )
-                        })}
-                    </Container>
-                )
-            })}
+            <Container>
+                {data.pages.map((page, i) => {
+                    return (
+                        <Fragment key={i}>
+                            {page.results.map((movie: Movie) => {
+                                return (
+                                    <Item key={`${movie.id}`}>
+                                        <MovieItem movie={movie} />
+                                    </Item>
+                                )
+                            })}
+                        </Fragment>
+                    )
+                })}
+            </Container>
+
             <div>
                 <button
                     ref={ref}

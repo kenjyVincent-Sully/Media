@@ -1,6 +1,6 @@
+import { FC, Fragment, useEffect } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import { getSearchResultsInfiniteScroll } from '@api/search';
-import { FC, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import MovieItem from '../MovieItem';
 import { Container, Item } from './style';
@@ -50,27 +50,21 @@ const InfinteScrollSearchResults: FC<{ keywords: string | string[] }> = ({ keywo
 
     return (
         <>
-
-
-            {data.pages.map((page, i) => {
-
-                return (
-                    < Container key={i} >
-                        {
-                            page.results.map((movie: Movie) => {
-
+            <Container>
+                {data.pages.map((page, i) => {
+                    return (
+                        <Fragment key={i}>
+                            {page.results.map((movie: Movie) => {
                                 return (
                                     <Item key={`${movie.id}`}>
                                         <MovieItem movie={movie} />
                                     </Item>
                                 )
-                            })
-                        }
-                    </Container>
-                )
-
-
-            })}
+                            })}
+                        </Fragment>
+                    )
+                })}
+            </Container>
             <div>
                 <button
                     ref={ref}
