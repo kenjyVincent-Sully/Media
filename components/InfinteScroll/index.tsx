@@ -46,12 +46,20 @@ const InfiniteScroll: FC = () => {
         }
     }, [inView])
 
-    return status === 'loading' ? (
-        <p>Loading...</p>
-    ) : status === 'error' ? (
+    if (status === 'loading') {
+        return <p>Loading...</p>
+    }
+
+    if (error) {
         // @ts-ignore
-        <p>Error: {error.message}</p>
-    ) : (
+        return <p>Error: {error.message}</p>
+    }
+
+    if (data === null) {
+        return <div>Pas de resultat.</div>
+    }
+
+    return (
         <>
             {data.pages.map((page, i) => {
                 return (
