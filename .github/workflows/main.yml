@@ -18,13 +18,13 @@ jobs:
   linter:
     runs-on: ubuntu-latest
     steps:
-      - run: nmp ci
+      - run: npm ci
       - run: npm run lint
       
   tests:
     runs-on: ubuntu-latest 
     steps:
-      - run: nmp ci
+      - run: npm ci
       - run: npm run test
     
   # This workflow contains a single job called "build"
