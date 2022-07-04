@@ -1,10 +1,9 @@
 import { FC, useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router'
-import Layout from "@layout/index";
 import styles from "@styles/Home.module.css";
 import { Movie } from 'types/Movie';
 import { getMovieDetails } from '@api/movies';
-import { Paraph, Img, ContainerText, TitleMovie, Container, ContentImg, Head, Vote } from "./style";
+import { Paraph, Img, ContainerText, TitleMovie, Container, ContentImg, Head, Vote } from "../styles/detail";
 
 
 const Detail: FC = () => {
