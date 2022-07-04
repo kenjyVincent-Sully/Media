@@ -6,7 +6,7 @@ body {
         Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 
     background: url("../public/img/backgroundimg.png"), #0d1d37;
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     background-blend-mode: lighten;
     color: white;

@@ -76,9 +76,9 @@ const SearchBar = () => {
                         return (
                             <li key={`${i}-${id}`} >
 
-                                {/* <a href={`/${id}`}> */}
-                                {title}
-                                {/* </a> */}
+                                <a href={`/${id}`}>
+                                    {title}
+                                </a>
 
                             </li>
                         )

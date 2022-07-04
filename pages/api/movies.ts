@@ -13,7 +13,7 @@ export function getGenres() {
 }
 
 
-export function getDetails(id?: number) {
+export function getMovieDetails(id: number) {
     const url = `${process.env.NEXT_PUBLIC_PATH_API_URI}/movie/${id}?api_key=${process.env.NEXT_PUBLIC_TMDB_MOVIE_KEY}&language=fr`;
     return fetch(url)
         .then((response) => response.json())
