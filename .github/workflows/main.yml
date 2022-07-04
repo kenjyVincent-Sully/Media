@@ -18,14 +18,14 @@ jobs:
   linter:
     runs-on: ubuntu-latest
     steps:
-      - run: npm ci
-      - run: npm run lint
+      - run: yarn ci
+      - run: yarn run lint
       
   tests:
     runs-on: ubuntu-latest 
     steps:
-      - run: npm ci
-      - run: npm run test
+      - run: yarn ci
+      - run: yarn run test
     
   # This workflow contains a single job called "build"
   build:
