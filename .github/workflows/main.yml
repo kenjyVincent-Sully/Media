@@ -15,17 +15,28 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  linter:
+  lint:
     runs-on: ubuntu-latest
     steps:
-      - run: yarn
-      - run: yarn lint
-      
-  tests:
-    runs-on: ubuntu-latest 
+      - uses: actions/checkout@v2
+      - uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: install # will run `yarn install` command
+      - uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: lint # will run `yarn build` command
+          
+          
+  test:
+    runs-on: ubuntu-latest
     steps:
-      - run: yarn
-      - run: yarn test
+      - uses: actions/checkout@v2
+      - uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: install # will run `yarn install`
+      - uses: borales/actions-yarn@v3.0.0
+        with:
+          cmd: test # will run `yarn test` command
     
   # This workflow contains a single job called "build"
   build:
