@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Devices from "@helper/Devices";
 import { secondaryTextColor, labelColor } from "@styles/colors";
 
 const Select = styled.select`
@@ -48,7 +49,11 @@ const WrapFilter = styled.div`
 
 const Item = styled.div`
     width: 145px;
-    /* margin: 0 auto; */
+
+    @media ${Devices.mobileL} {
+        margin-right: 20px;
+    }
+   
 `;
 
 
