@@ -55,7 +55,7 @@ const InfiniteScroll: FC = () => {
         return <p>Error: {error.message}</p>
     }
 
-    if (data === null) {
+    if (data === null || typeof data === 'undefined') {
         return <div>Pas de resultat.</div>
     }
 
