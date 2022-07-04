@@ -43,7 +43,7 @@ const InfinteScrollSearchResults: FC<{ keywords: string | string[] }> = ({ keywo
         return <p>Error: {error.message}</p>
     }
 
-    if (data === null) {
+    if (data === null || typeof data === 'undefined') {
         return <div>Pas de resultat.</div>
     }
 
