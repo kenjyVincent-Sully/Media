@@ -4,6 +4,7 @@ import { FC, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import MovieItem from '../MovieItem';
 import { Container, Item } from './style';
+import { Movie } from 'types/Movie';
 
 const InfinteScrollSearchResults: FC<{ keywords: string | string[] }> = ({ keywords }) => {
     const { ref, inView } = useInView();
@@ -56,7 +57,7 @@ const InfinteScrollSearchResults: FC<{ keywords: string | string[] }> = ({ keywo
                 return (
                     < Container key={i} >
                         {
-                            page.results.map(movie => {
+                            page.results.map((movie: Movie) => {
 
                                 return (
                                     <Item key={`${movie.id}`}>

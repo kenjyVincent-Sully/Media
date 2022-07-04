@@ -1,12 +1,12 @@
+import { FC, useEffect } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import { useAppSelector } from 'app/hooks';
-import { FC, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { getListingMoviesInfiniteScroll } from '@api/movies';
 import { selectFilterGenre, selectFilterYear, selectSortBy } from '@features/moviesListing/MoviesListingSlice';
 import MovieItem from '../MovieItem';
 import { Container, Item } from '../MoviesTopList/style';
-
+import type { Movie } from 'types/Movie';
 
 const InfiniteScroll: FC = () => {
     const filteredGenre = useAppSelector(selectFilterGenre);
@@ -64,7 +64,7 @@ const InfiniteScroll: FC = () => {
             {data.pages.map((page, i) => {
                 return (
                     <Container key={i}>
-                        {page.results.map(movie => {
+                        {page.results.map((movie: Movie) => {
                             return (
                                 <Item key={`${movie.id}`}>
                                     <MovieItem movie={movie} />

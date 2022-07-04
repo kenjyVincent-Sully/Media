@@ -1,11 +1,10 @@
-import { InferProps } from "prop-types";
 import { FC } from "react";
-import { DataMoviePropsTypes } from "types/Movie";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation } from "swiper";
 import MovieItem from "../MovieItem";
+import { Movie } from "types/Movie";
 
-const MoviesTopList: FC = ({ data }: InferProps<typeof MoviesTopList.propTypes>) => {
+const MoviesTopList: FC<{ data: Array<Movie> }> = ({ data }) => {
 
     return (
         <>
@@ -38,7 +37,7 @@ const MoviesTopList: FC = ({ data }: InferProps<typeof MoviesTopList.propTypes>)
                 modules={[Pagination, Navigation]}
                 className="mySwiper"
             >
-                {data.map((movies: object, i: number) => {
+                {data.map((movies: Movie, i: number) => {
                     return (
                         <SwiperSlide key={i}>
                             <MovieItem movie={movies} />
@@ -50,10 +49,5 @@ const MoviesTopList: FC = ({ data }: InferProps<typeof MoviesTopList.propTypes>)
 
     )
 }
-
-MoviesTopList.propTypes = {
-    data: DataMoviePropsTypes,
-};
-
 
 export default MoviesTopList;

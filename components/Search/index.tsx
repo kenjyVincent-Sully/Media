@@ -1,6 +1,25 @@
 import { useState, useEffect } from 'react';
 import { getSearchResults } from "@api/search";
 import { Form, Search, Suggestions, ButtonSearch } from './style';
+import type { SyntheticEvent } from 'react'
+
+interface KeyboardEvent<T = Element> extends SyntheticEvent<T> {
+    altKey: boolean;
+    /** @deprecated */
+    charCode: number;
+    ctrlKey: boolean;
+    getModifierState(key: string): boolean;
+    key: string;
+    /** @deprecated */
+    keyCode: number;
+    locale: string;
+    location: number;
+    metaKey: boolean;
+    repeat: boolean;
+    shiftKey: boolean;
+    /** @deprecated */
+    which: number;
+}
 
 const SearchBar = () => {
 
@@ -21,7 +40,8 @@ const SearchBar = () => {
             .catch(err => console.log(err));
     }
 
-    const onKeyDown = (e) => {
+    const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+
         // User pressed the enter key
         if (e.keyCode === 13 && input.length >= 2) {
             setActiveSuggestionIndex(0);
@@ -56,9 +76,9 @@ const SearchBar = () => {
                         return (
                             <li key={`${i}-${id}`} >
 
-                                <a href={`/${id}`}>
-                                    {title}
-                                </a>
+                                {/* <a href={`/${id}`}> */}
+                                {title}
+                                {/* </a> */}
 
                             </li>
                         )

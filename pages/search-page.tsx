@@ -13,7 +13,7 @@ const SearchPage: FC = () => {
     const [totalResults, setTotalResults] = useState([0]);
 
     const searchRequest = () => {
-        getSearchResults(q).then(results => {
+        getSearchResults(q as string).then(results => {
             setTotalResults(results.total_results);
 
         }).catch(err => console.log(err));

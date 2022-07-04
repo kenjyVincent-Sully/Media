@@ -51,8 +51,6 @@ const MovieFilter: FC<{ genres: Array<Genre> }> = ({ genres }) => {
     const handleFilterGenre = (arg: Option) => {
 
         const selectedGenre = arg.value;
-        console.log(selectedGenre);
-
         dispatch(filterGenreId(selectedGenre));
 
         dispatch(getMovies({

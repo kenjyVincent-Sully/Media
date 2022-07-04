@@ -1,13 +1,14 @@
-import { InferProps } from "prop-types";
 import { GetStaticProps } from 'next';
 import { getTopMovies, getListingMoviesInfiniteScroll, getGenres } from "./api/movies";
-import { DataMoviePropsTypes, GenresPropsTypes } from "types/Movie";
+import { FC } from "react";
 import Layout from "layout";
 import MoviesTopList from "@components/MoviesTopList";
 import MoviesList from "@components/MoviesList";
 import styles from "@styles/Home.module.css";
+import { Genre, Movie } from 'types/Movie';
 
-export default function Movie({ topMovies, filtersGenres, initialMoviesList }: InferProps<typeof Movie.propTypes>) {
+
+const Movie: FC<{ topMovies: Array<Movie>, filtersGenres: Array<Genre>, initialMoviesList: Array<Movie> }> = ({ topMovies, filtersGenres, initialMoviesList }) => {
 
     return (
         <div className={styles.container}>
@@ -23,6 +24,7 @@ export default function Movie({ topMovies, filtersGenres, initialMoviesList }: I
     )
 }
 
+export default Movie;
 
 export const getStaticProps: GetStaticProps = async () => {
     const dataTopMovie = await getTopMovies();
@@ -38,8 +40,3 @@ export const getStaticProps: GetStaticProps = async () => {
     }
 }
 
-Movie.propTypes = {
-    topMovies: DataMoviePropsTypes,
-    filtersGenres: GenresPropsTypes,
-    initialMoviesList: DataMoviePropsTypes
-};
