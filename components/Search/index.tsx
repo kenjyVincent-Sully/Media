@@ -1,113 +1,53 @@
-import { useState, useEffect } from 'react';
-import { getSearchResults } from "@api/search";
+import { useState } from 'react';
+import { Search as SearchAPI } from "@api/search";
 import { Form, Search, Suggestions, ButtonSearch } from './style';
-import type { SyntheticEvent } from 'react'
-
-interface KeyboardEvent<T = Element> extends SyntheticEvent<T> {
-    altKey: boolean;
-    /** @deprecated */
-    charCode: number;
-    ctrlKey: boolean;
-    getModifierState(key: string): boolean;
-    key: string;
-    /** @deprecated */
-    keyCode: number;
-    locale: string;
-    location: number;
-    metaKey: boolean;
-    repeat: boolean;
-    shiftKey: boolean;
-    /** @deprecated */
-    which: number;
-}
 
 const SearchBar = () => {
-
-    const [input, setInput] = useState('');
+    // const [input, setInput] = useState('');
     const [results, setResults] = useState([]);
-    const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(0);
 
-    const handleSearch = (e: React.FormEvent<HTMLInputElement>) => {
-        const keywordsValue = e.currentTarget.value;
-        setInput(keywordsValue);
+    const handleSearch = ( { currentTarget: { value } }: React.FormEvent<HTMLInputElement>) => {
+       new SearchAPI().getSearchResults(value)
+       .then(({ results }) => {
+        setResults(results);
+      })
+      .catch((err) => console.log(err));
     }
 
-    const autoComplete = () => {
-        getSearchResults(input).then(results => {
+    // const SuggestionsListComponent = () => {
+    //     return results.length > 0 ? (
+    //         <Suggestions>
+    //             <ul className="suggestions">
+    //                 {results.map((result, i) => {
 
-            setResults(results.results);
-        })
-            .catch(err => console.log(err));
-    }
+    //                     const { title, id } = result;
 
-    const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    //                     return (
+    //                         <li key={`${i}-${id}`} >
 
-        // User pressed the enter key
-        if (e.keyCode === 13 && input.length >= 2) {
-            setActiveSuggestionIndex(0);
+    //                             <a href={`/${id}`}>
+    //                                 {title}
+    //                             </a>
 
-        }
-        // User pressed the up arrow
-        else if (e.keyCode === 38) {
-            if (activeSuggestionIndex === 0) {
-                return;
-            }
+    //                         </li>
+    //                     )
+    //                 })}
+    //             </ul>
+    //         </Suggestions>
 
-            setActiveSuggestionIndex(activeSuggestionIndex - 1);
-        }
-        // User pressed the down arrow
-        else if (e.keyCode === 40) {
-            if (activeSuggestionIndex - 1 === results.length) {
-                return;
-            }
-
-            setActiveSuggestionIndex(activeSuggestionIndex + 1);
-        }
-    };
-
-    const SuggestionsListComponent = () => {
-        return results.length > 0 ? (
-            <Suggestions>
-                <ul className="suggestions">
-                    {results.map((result, i) => {
-
-                        const { title, id } = result;
-
-                        return (
-                            <li key={`${i}-${id}`} >
-
-                                <a href={`/${id}`}>
-                                    {title}
-                                </a>
-
-                            </li>
-                        )
-                    })}
-                </ul>
-            </Suggestions>
-
-        ) : (
-            <>
-                {input.length > 0 &&
-                    <div className="no-suggestions">
-                        <span role="img" aria-label="tear emoji">
-                            😪
-                        </span>{" "}
-                        <em>Désole pas de suggestion</em>
-                    </div>
-                }
-            </>
-
-
-        );
-    };
-
-    useEffect(() => {
-        if (input.length >= 2) {
-
-            autoComplete();
-        }
-    }, [input]);
+    //     ) : (
+    //         <>
+    //             {input.length > 0 &&
+    //                 <div className="no-suggestions">
+    //                     <span role="img" aria-label="tear emoji">
+    //                         😪
+    //                     </span>{" "}
+    //                     <em>Désole pas de suggestion</em>
+    //                 </div>
+    //             }
+    //         </>
+    //     );
+    // };
 
     return (
         <div>
@@ -116,14 +56,11 @@ const SearchBar = () => {
                     type="search"
                     placeholder='Rechercher un film'
                     onChange={handleSearch}
-                    onKeyDown={onKeyDown}
-                    value={input}
-
                 />
                 <ButtonSearch type="submit" aria-label="Recherche">Recherche</ButtonSearch>
 
             </Form>
-            {<SuggestionsListComponent />}
+            {/* {<SuggestionsListComponent />} */}
         </div>
     )
 }

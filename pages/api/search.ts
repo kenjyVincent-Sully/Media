@@ -1,14 +1,36 @@
-export function getSearchResults(keywords: string) {
-    const url = `${process.env.NEXT_PUBLIC_PATH_API_URI}/search/movie?api_key=${process.env.NEXT_PUBLIC_TMDB_MOVIE_KEY}&language=fr&query=${keywords}`;
-    return fetch(url)
-        .then((response) => response.json())
-        .catch((error) => console.error(error));
-}
+import { API } from "./api";
+export class Search extends API{
+    protected api_key: string = process.env.NEXT_PUBLIC_TMDB_MOVIE_KEY ?? '';
 
-export function getSearchResultsInfiniteScroll(keywords: string | string[], page: number) {
+    constructor() {
+        super(process.env.NEXT_PUBLIC_PATH_API_URI ?? '');
+    }
 
-    const url = `${process.env.NEXT_PUBLIC_PATH_API_URI}/search/movie?api_key=${process.env.NEXT_PUBLIC_TMDB_MOVIE_KEY}&language=fr&query=${keywords}&page=${page}`;
-    return fetch(url)
-        .then((response) => response.json())
-        .catch((error) => console.error(error));
+    getBaseParams(): any {
+        return {
+            api_key: this.api_key,
+            language: 'fr',
+        }
+    }
+    getSearchResults(keywords: string): Promise<any> {
+        const query = keywords !== '-1' ? { query: keywords } : {};
+        const params = {
+            ...this.getBaseParams(),
+            ...query,
+        }
+       
+        return this.get(`/search/movie`, params);
+    }
+    getSearchResultsInfiniteScroll(keywords: string | string[], page: number): Promise<any> {
+        const query = keywords !== '-1' ? { query: keywords } : {};
+        const pages = page !== 1 ? { page: page } : {};
+        
+        const params = {
+            ...this.getBaseParams(),
+            ...query,
+            ...pages,
+        }
+
+        return this.get(`/search/movie`, params);
+    }
 }

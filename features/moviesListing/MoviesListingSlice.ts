@@ -1,4 +1,5 @@
-import { getListingMoviesInfiniteScroll } from "@api/movies";
+import { Movie as MovieAPI } from "@api/movies";
+// import { getListingMoviesInfiniteScroll } from "@api/movies";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { AppState } from 'app/store';
 import { FilterParams, Movie, MoviesListingState } from "types/Movie";
@@ -19,7 +20,7 @@ const initialState: MoviesListingState = {
 export const getMovies = createAsyncThunk(
     "getMovies",
     async (payload: FilterParams) => {
-        const response = await getListingMoviesInfiniteScroll(payload.page as number, payload.genre, payload.year, payload.sortBy);
+        const response = await MovieAPI.getListingMoviesInfiniteScroll(payload.page as number, payload.genre, payload.year, payload.sortBy);
         return response;
     }
 )

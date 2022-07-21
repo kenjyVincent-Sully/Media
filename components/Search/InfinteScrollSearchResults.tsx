@@ -1,6 +1,6 @@
 import { FC, Fragment, useEffect } from 'react';
 import { useInfiniteQuery } from 'react-query';
-import { getSearchResultsInfiniteScroll } from '@api/search';
+import { Search as SearchAPI } from "@api/search";
 import { useInView } from 'react-intersection-observer';
 import MovieItem from '../MovieItem';
 import { Container, Item } from './style';
@@ -17,7 +17,7 @@ const InfinteScrollSearchResults: FC<{ keywords: string | string[] }> = ({ keywo
         isFetching,
         isFetchingNextPage,
         status,
-    } = useInfiniteQuery('results', ({ pageParam = 1 }) => getSearchResultsInfiniteScroll(keywords, pageParam),
+    } = useInfiniteQuery('results', ({ pageParam = 1 }) => new SearchAPI().getSearchResultsInfiniteScroll(keywords, pageParam),
         {
 
             getNextPageParam: (data, pages) => {

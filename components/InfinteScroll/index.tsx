@@ -2,7 +2,7 @@ import { FC, Fragment, useEffect } from 'react';
 import { useInfiniteQuery } from 'react-query';
 import { useAppSelector } from 'app/hooks';
 import { useInView } from 'react-intersection-observer';
-import { getListingMoviesInfiniteScroll } from '@api/movies';
+import { Movie as MovieAPI } from '@api/movies';
 import { selectFilterGenre, selectFilterYear, selectSortBy } from '@features/moviesListing/MoviesListingSlice';
 import MovieItem from '../MovieItem';
 import { Container, Item } from '../MoviesTopList/style';
@@ -23,7 +23,7 @@ const InfiniteScroll: FC = () => {
         isFetchingNextPage,
         status,
         refetch,
-    } = useInfiniteQuery('results', ({ pageParam = 1 }) => getListingMoviesInfiniteScroll(pageParam, filteredGenre, filteredYear, sortBy),
+    } = useInfiniteQuery('results', ({ pageParam = 1 }) => new MovieAPI().getListingMoviesInfiniteScroll(pageParam, filteredGenre, filteredYear, sortBy),
         {
 
             getNextPageParam: (data, pages) => {
@@ -38,7 +38,7 @@ const InfiniteScroll: FC = () => {
     useEffect(() => {
 
         refetch({ refetchPage: (page, index) => index === 0 })
-    }, [filteredGenre, filteredYear, sortBy]);
+    }, [filteredGenre, filteredYear, refetch, sortBy]);
 
     useEffect(() => {
         if (inView && hasNextPage) {

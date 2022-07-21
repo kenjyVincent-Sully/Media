@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { useState, useEffect, FC } from 'react';
-import { getSearchResults } from '@api/search';
+import { Search as SearchAPI } from "@api/search";
 import Layout from 'layout';
 import InfinteScrollSearchResults from '@components/Search/InfinteScrollSearchResults';
 import styles from "@styles/Home.module.css";
@@ -13,7 +13,7 @@ const SearchPage: FC = () => {
     const [totalResults, setTotalResults] = useState([0]);
 
     const searchRequest = () => {
-        getSearchResults(q as string).then(results => {
+        new SearchAPI().getSearchResults(q as string).then(results => {
             setTotalResults(results.total_results);
 
         }).catch(err => console.log(err));
