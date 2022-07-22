@@ -1,5 +1,4 @@
 import { Movie as MovieAPI } from "@api/movies";
-// import { getListingMoviesInfiniteScroll } from "@api/movies";
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { AppState } from 'app/store';
 import { FilterParams, Movie, MoviesListingState } from "types/Movie";

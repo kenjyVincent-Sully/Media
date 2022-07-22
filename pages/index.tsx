@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next';
 import { Movie as MovieAPI } from "./api/movies";
 import { FC } from "react";
-import Layout from "layout";
+import { Layout } from "layout";
 import MoviesTopList from "@components/MoviesTopList";
 import MoviesList from "@components/MoviesList";
 import styles from "@styles/Home.module.css";
