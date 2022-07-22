@@ -1,5 +1,6 @@
 import { Provider } from 'react-redux';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import { SearchProvider } from '../context/SearchContext';
 import store from 'app/store';
 import {
     QueryClient,

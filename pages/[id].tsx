@@ -7,22 +7,19 @@ import { Paraph, Img, ContainerText, TitleMovie, Container, ContentImg, Head, Vo
 
 
 const Detail: FC = () => {
-
     const router = useRouter();
     const [results, setResults] = useState<Movie | undefined>();
     const id = parseInt(router.query.id as string, 10);
     const [isLoaded, setIsLoaded] = useState(false);
     const [error, setError] = useState(null);
 
-
     const initMovieDetails = useCallback(() => {
-        new MovieAPI().getDetails(id).then(results => {
+        new MovieAPI().getDetails(id).then((results) => {
             setResults(results);
             setIsLoaded(true);
         })
             .catch(err => setError(err));
-    }, [id]
-    );
+    }, [id]);
 
     useEffect(() => {
         if (!isNaN(id)) {

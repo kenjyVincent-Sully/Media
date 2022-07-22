@@ -8,18 +8,19 @@ import styles from "@styles/Home.module.css";
 import { Genre, Movie } from 'types/Movie';
 
 
-const Movie: FC<{ topMovies: Array<Movie>, filtersGenres: Array<Genre>, initialMoviesList: Array<Movie> }> = ({ topMovies, filtersGenres, initialMoviesList }) => (
-    <div className={styles.container}>
-        <Layout>
-            <MoviesTopList data={topMovies} />
-            <hr className={styles.hr} />
-            <MoviesList
-                initialLists={initialMoviesList}
-                genres={filtersGenres}
-            />
-        </Layout>
-    </div>
-)
+const Movie: FC<{ topMovies: Array<Movie>, 
+    filtersGenres: Array<Genre>, 
+    initialMoviesList: Array<Movie>
+}> = ({ topMovies, filtersGenres, initialMoviesList }) => (
+    <Layout>
+        <MoviesTopList data={topMovies} />
+        <hr className={styles.hr} />
+        <MoviesList
+            initialLists={initialMoviesList}
+            genres={filtersGenres}
+        />
+    </Layout>
+);
 
 export default Movie;
 

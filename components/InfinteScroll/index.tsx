@@ -25,26 +25,23 @@ const InfiniteScroll: FC = () => {
         refetch,
     } = useInfiniteQuery('results', ({ pageParam = 1 }) => new MovieAPI().getListingMoviesInfiniteScroll(pageParam, filteredGenre, filteredYear, sortBy),
         {
-
             getNextPageParam: (data, pages) => {
                 if (data.page < data.total_pages) {
                     return data.page + 1;
                 }
-
                 return false;
             },
         })
 
     useEffect(() => {
-
         refetch({ refetchPage: (page, index) => index === 0 })
-    }, [filteredGenre, filteredYear, refetch, sortBy]);
+    }, [filteredGenre, filteredYear, sortBy, refetch]);
 
     useEffect(() => {
         if (inView && hasNextPage) {
             fetchNextPage()
         }
-    }, [inView])
+    }, [fetchNextPage, hasNextPage, inView])
 
     if (status === 'loading') {
         return <p>Loading...</p>

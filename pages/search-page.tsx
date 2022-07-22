@@ -3,43 +3,27 @@ import { useState, useEffect, FC } from 'react';
 import { Search as SearchAPI } from "@api/search";
 import Layout from 'layout';
 import InfinteScrollSearchResults from '@components/Search/InfinteScrollSearchResults';
-import styles from "@styles/Home.module.css";
 
 const SearchPage: FC = () => {
-
-    const router = useRouter();
-    const { query = {} } = router || {};
-    const { q = "" } = query || {};
+    const { query: { q } } = useRouter();
     const [totalResults, setTotalResults] = useState([0]);
 
-    const searchRequest = () => {
-        new SearchAPI().getSearchResults(q as string).then(results => {
-            setTotalResults(results.total_results);
-
-        }).catch(err => console.log(err));
-    }
-
     useEffect(() => {
-        if (q) {
-            searchRequest();
-        }
+        q && new SearchAPI().getSearchResults(q as string)
+        .then(({ total_results }) => {
+            setTotalResults(total_results);
+        }).catch(err => console.log(err));
     }, [q]);
 
-    if (q.length === 0) {
-        return (
-            <div>
-                Loading...
-            </div>
-        )
+    if (!q) {
+        return <div>Loading...</div>;
     }
 
     return (
-        <div className={styles.container}>
-            <Layout>
-                <h1>Résultas : {totalResults} Films</h1>
-                <InfinteScrollSearchResults keywords={q} />
-            </Layout>
-        </div>
+        <Layout>
+            <h1>Résultas : {totalResults} Films</h1>
+            <InfinteScrollSearchResults keywords={q} />
+        </Layout>
     );
 }
 

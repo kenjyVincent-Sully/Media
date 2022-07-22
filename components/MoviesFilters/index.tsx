@@ -42,8 +42,8 @@ const MovieFilter: FC<{ genres: Array<Genre> }> = ({ genres }) => {
     const defaultOption = optionsSortBy["-1"];
 
     const formattedData = () => {
-        genres.forEach(genre => {
-            optionsGenres.push({ value: genre.id.toString(), label: genre.name });
+        genres.forEach(({ id, name }) => {
+            optionsGenres.push({ value: id.toString(), label: name });
         });
     }
     formattedData();
