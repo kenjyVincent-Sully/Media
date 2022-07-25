@@ -1,28 +1,26 @@
-import { useRouter } from 'next/router';
-import { useState, useEffect, FC } from 'react';
+import { useState, useEffect, FC, useContext } from 'react';
 import { Search as SearchAPI } from "@api/search";
-import Layout from 'layout';
-import InfinteScrollSearchResults from '@components/Search/InfinteScrollSearchResults';
+import { Layout } from 'layout';
+import { SearchContext } from 'context/SearchContext';
 
 const SearchPage: FC = () => {
-    const { query: { q } } = useRouter();
+    const { search } = useContext(SearchContext);
     const [totalResults, setTotalResults] = useState([0]);
 
     useEffect(() => {
-        q && new SearchAPI().getSearchResults(q as string)
+        search && new SearchAPI().getSearchResults(search)
         .then(({ total_results }) => {
             setTotalResults(total_results);
         }).catch(err => console.log(err));
-    }, [q]);
+    }, [search]);
 
-    if (!q) {
+    if (!search) {
         return <div>Loading...</div>;
     }
 
     return (
         <Layout>
             <h1>Résultas : {totalResults} Films</h1>
-            <InfinteScrollSearchResults keywords={q} />
         </Layout>
     );
 }

@@ -1,10 +1,4 @@
-import { InferProps } from "prop-types";
 import { FC } from "react";
-import { useAppDispatch, useAppSelector } from "@app/hooks";
-import {
-    selectFilterGenre, filterGenreId,
-    getMovies, selectFilterYear, filterYear, setSortBy, selectSortBy
-} from "@features/moviesListing/MoviesListingSlice";
 import { WrapFilter, LabelSelect, ContainerFilter } from "../MoviesTopList/style";
 import Dropdown, { Option } from 'react-dropdown';
 import { Genre } from "types/Movie";
@@ -22,10 +16,6 @@ const getFilteryears = () => {
 
 
 const MovieFilter: FC<{ genres: Array<Genre> }> = ({ genres }) => {
-    const dispatch = useAppDispatch();
-    const filteredGenre = useAppSelector(selectFilterGenre);
-    const filteredYear = useAppSelector(selectFilterYear);
-    const sortBy = useAppSelector(selectSortBy);
     const optionYears = getFilteryears();
     const optionsGenres: Array<Option> = [];
     const optionsSortBy = [
@@ -48,69 +38,30 @@ const MovieFilter: FC<{ genres: Array<Genre> }> = ({ genres }) => {
     }
     formattedData();
 
-    const handleFilterGenre = (arg: Option) => {
-
-        const selectedGenre = arg.value;
-        dispatch(filterGenreId(selectedGenre));
-
-        dispatch(getMovies({
-            genre: selectedGenre,
-            year: filteredYear,
-            sortBy: sortBy,
-        }));
-    }
-
-    const handleFilterYear = (arg: Option) => {
-        const selectYear = arg.value;
-
-        dispatch(filterYear(parseInt(selectYear, 10)));
-
-        dispatch(getMovies({
-            year: parseInt(selectYear, 10),
-            genre: filteredGenre,
-            sortBy: sortBy,
-        }));
-    }
-
-    const handleSortBy = (arg: Option) => {
-        const sortByValue = arg.value;
-
-        dispatch(setSortBy(sortByValue));
-
-        dispatch(getMovies({
-            sortBy: sortByValue,
-            year: filteredYear,
-            genre: filteredGenre,
-
-        }));
-    }
-
     return (
         <ContainerFilter>
             <WrapFilter>
                 <LabelSelect htmlFor="sortBy">Trier par:</LabelSelect>
                 <Dropdown
                     options={optionsSortBy}
-                    onChange={handleSortBy}
+                    onChange={console.log}
                     value={defaultOption}
                     placeholder="Trier par"
                 />
             </WrapFilter>
 
             <WrapFilter>
-
-
                 <LabelSelect>Trier par:  </LabelSelect>
                 <Dropdown
                     options={optionsGenres}
-                    onChange={handleFilterGenre}
+                    onChange={console.log}
                     value={defaultOption}
                     placeholder="Genres"
                 />
 
                 <Dropdown
                     options={optionYears}
-                    onChange={handleFilterYear}
+                    onChange={console.log}
                     value={defaultOption}
                     placeholder="Année"
                 />

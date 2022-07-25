@@ -1,4 +1,11 @@
+import { ISearch, SearchList, SearchNormalizer } from "models/search";
+import { number } from "prop-types";
 import { API } from "./api";
+
+interface ISearchAPI {
+    results: ISearch[];
+    total_results: number;
+}
 export class Search extends API{
     protected api_key: string = process.env.NEXT_PUBLIC_TMDB_MOVIE_KEY ?? '';
 
@@ -12,14 +19,14 @@ export class Search extends API{
             language: 'fr',
         }
     }
-    getSearchResults(keywords: string): Promise<any> {
-        const query = keywords !== '-1' ? { query: keywords } : {};
+    getSearchResults(keywords: string): Promise<SearchList> {
+        const query = keywords ? { query: keywords } : {};
         const params = {
             ...this.getBaseParams(),
             ...query,
         }
-       
-        return this.get(`/search/movie`, params);
+        return this.get('/search/movie', params)
+            .then(({ results, total_results }: ISearchAPI) => new SearchList(total_results, results.map(item => new SearchNormalizer(item))));
     }
     getSearchResultsInfiniteScroll(keywords: string | string[], page: number): Promise<any> {
         const query = keywords !== '-1' ? { query: keywords } : {};
