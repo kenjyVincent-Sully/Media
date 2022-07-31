@@ -1,5 +1,4 @@
 import { ISearch, SearchList, SearchNormalizer } from "models/search";
-import { number } from "prop-types";
 import { API } from "./api";
 
 interface ISearchAPI {

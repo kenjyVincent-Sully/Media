@@ -5,7 +5,7 @@ import { SearchNormalizer } from 'models/search';
 
 const SearchBar = () => {
     const [results, setResults] = useState<SearchNormalizer[]>([]);
-    const [total, setTotal] = useState(0)
+    const [total, setTotal] = useState(0);
 
     const handleSearch = ( { currentTarget: { value } }: React.FormEvent<HTMLInputElement>) => {
        new SearchAPI().getSearchResults(value)
@@ -17,8 +17,9 @@ const SearchBar = () => {
     }
 
     useEffect(() => {
+        console.log(total);
         console.log(results);
-    },[results]);
+    },[results,total]);
 
     return (
         <div>
